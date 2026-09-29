@@ -1,0 +1,32 @@
+{
+	"node": "n8n-nodes-scrapeunblocker-google-search.googleSearchScraper",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": [
+		"Marketing",
+		"Data & Storage"
+	],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://github.com/ScrapeUnblocker/n8n-nodes-scrapeunblocker-google-search#credentials"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://github.com/ScrapeUnblocker/n8n-nodes-scrapeunblocker-google-search#readme"
+			}
+		]
+	},
+	"alias": [
+		"google",
+		"serp",
+		"search",
+		"seo",
+		"ads",
+		"rankings",
+		"ai overview",
+		"apify",
+		"scrapeunblocker"
+	]
+}
