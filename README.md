@@ -101,9 +101,9 @@ Example item (shortened):
   "keyword": "espresso machine",
   "type": "organic",
   "position": 1,
-  "title": "Coffee Machines",
-  "url": "https://www.terresdecafe.com/18-coffee-machines",
-  "description": "Discover our selection of automatic and espresso coffee machines . Combining ..."
+  "title": "Espresso machines: Ultimate Coffee",
+  "url": "https://www.wmf.com",
+  "description": "The portafilter espresso machine & espresso maker promise the highest espress..."
 }
 ```
 
@@ -176,3 +176,4 @@ Tested with n8n 2.40 (self-hosted).
 
 - 0.1.0: Initial release
 - 0.1.1: First release published from GitHub Actions with an npm provenance statement
+- 0.1.2: Node category renamed to Marketing & Content, the name n8n's verification scanner accepts
