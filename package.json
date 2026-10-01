@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-scrapeunblocker-google-search",
-	"version": "0.1.2",
+	"version": "0.1.3",
 	"description": "n8n community node for the Google Search Scraper Apify Actor by ScrapeUnblocker: Google organic results, ads and AI Overview with position, title, URL and snippet as JSON",
 	"license": "MIT",
 	"homepage": "https://github.com/ScrapeUnblocker/n8n-nodes-scrapeunblocker-google-search#readme",
