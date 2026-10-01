@@ -71,7 +71,7 @@ Pick a **Resource** and an **Operation**. Each n8n input item starts one Apify r
 | **Include AI Overview** | Whether to also return Google's AI Overview block (first page only) when Google shows one |
 | **Search From Country** | The country the search runs from. Random picks one automatically. |
 | **Wait After Load (Seconds)** | Extra pause after the results page loads, before it is parsed (0-30). Usually not needed. |
-| **Timeout (Seconds)** | Maximum run time of the Apify run. `0` keeps the Actor default. A run that times out fails the node. |
+| **Timeout (Seconds)** | How long the Apify run may take, in seconds. 0 uses the Actor's default. If the time runs out, the node stops. |
 
 ### How a run works
 
@@ -101,9 +101,9 @@ Example item (shortened):
   "keyword": "espresso machine",
   "type": "organic",
   "position": 1,
-  "title": "Espresso machines: Ultimate Coffee",
-  "url": "https://www.wmf.com",
-  "description": "The portafilter espresso machine & espresso maker promise the highest espress..."
+  "title": "Espresso Machines",
+  "url": "https://bellabarista.co.uk/Collections",
+  "description": "For over 20 years, Bella Barista have selected the finest Espresso Machines f..."
 }
 ```
 
@@ -177,3 +177,4 @@ Tested with n8n 2.40 (self-hosted).
 - 0.1.0: Initial release
 - 0.1.1: First release published from GitHub Actions with an npm provenance statement
 - 0.1.2: Node category renamed to Marketing & Content, the name n8n's verification scanner accepts
+- 0.1.3: Follows n8n's UX guidelines: example placeholders, plainer descriptions and messages
