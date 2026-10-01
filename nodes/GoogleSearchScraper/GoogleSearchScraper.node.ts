@@ -8,8 +8,8 @@ import type {
 } from 'n8n-workflow';
 import { NodeApiError, NodeConnectionTypes, NodeOperationError } from 'n8n-workflow';
 
-import type { OptionField } from './GenericFunctions';
-import { applyOptions, requireString, runActorAndGetItems } from './GenericFunctions';
+import type { OptionField, OutputShape } from './GenericFunctions';
+import { applyOptions, requireString, runActorAndGetItems, shapeItems } from './GenericFunctions';
 
 // ScrapeUnblocker's public "Google Search Scraper" Actor: https://apify.com/scrapeunblocker/google-search-scraper
 const ACTOR_ID = 'dJjaaOUxwQU6i7F1f';
@@ -31,6 +31,9 @@ const OPTION_FIELDS: Record<string, OptionField> = {
 	},
 };
 
+// "resource:operation" -> fields kept by Simplify (dot paths are flattened: a.b -> aB).
+const OUTPUT_SHAPES: Record<string, OutputShape> = {};
+
 function buildActorInput(
 	this: IExecuteFunctions,
 	resource: string,
@@ -49,7 +52,7 @@ function buildActorInput(
 		default:
 			throw new NodeOperationError(
 				this.getNode(),
-				`The operation "${operation}" is not supported for resource "${resource}"`,
+				`The operation '${operation}' is not supported for resource '${resource}'`,
 				{ itemIndex },
 			);
 	}
@@ -111,7 +114,7 @@ export class GoogleSearchScraper implements INodeType {
 					{
 						name: 'Search',
 						value: 'search',
-						description: 'Search Google for a query',
+						description: 'Find the organic results, ads and AI Overview Google shows for a query',
 						action: 'Search results',
 					},
 				],
@@ -123,7 +126,7 @@ export class GoogleSearchScraper implements INodeType {
 				type: 'string',
 				required: true,
 				default: '',
-				placeholder: 'espresso machine',
+				placeholder: 'e.g. espresso machine',
 				description:
 					'The Google search query. Search operators such as site:, intitle: and quotes are supported.',
 				displayOptions: {
@@ -340,7 +343,7 @@ export class GoogleSearchScraper implements INodeType {
 						},
 						default: 0,
 						description:
-							'Maximum run time of the Apify Actor run. 0 keeps the Actor default. A run that times out fails the node.',
+							"How long the Apify run may take, in seconds. 0 uses the Actor's default. If the time runs out, the node stops.",
 					},
 					{
 						displayName: 'Wait After Load (Seconds)',
@@ -378,8 +381,9 @@ export class GoogleSearchScraper implements INodeType {
 					itemIndex: i,
 					timeoutSecs: (timeout as number) || undefined,
 				});
+				const shape = OUTPUT_SHAPES[`${resource}:${operation}`];
 
-				for (const result of results) {
+				for (const result of shapeItems.call(this, results, shape, i)) {
 					returnData.push({ json: result, pairedItem: { item: i } });
 				}
 			} catch (error) {
